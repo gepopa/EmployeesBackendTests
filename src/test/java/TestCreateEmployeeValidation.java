@@ -2,9 +2,9 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CreateEmployeeValidation {
+public class TestCreateEmployeeValidation {
 
-    private Request request = new Request();
+    private final Request request = new Request();
     private Response response;
 
 

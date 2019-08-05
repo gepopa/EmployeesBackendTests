@@ -1,25 +1,18 @@
 import io.restassured.response.Response;
-import model.Employee;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class GetAllEmployees {
+public class TestGetAllEmployees {
 
 
-    private Request request = new Request();
+    private final String name = RandomGenerator.randomLetters(14);
+    private final String age = RandomGenerator.randomNumbers(2);
+    private final String salary = RandomGenerator.randomNumbers(5);
 
-    private RandomGenerator randomName = new RandomGenerator(14);
-    private RandomGenerator randomAge = new RandomGenerator(2);
-    private RandomGenerator randomSalary = new RandomGenerator(5);
-
-    private String name = randomName.randomLetters();
-    private String age = randomAge.randomNumbers();
-    private String salary = randomSalary.randomNumbers();
-
-    private Employee newEmployee = new Employee(name, age, salary);
-
+    private final Employee newEmployee = new Employee(name, age, salary);
+    private final Request request = new Request();
 
     @Test
     public void testCanGetAllEmployees() {

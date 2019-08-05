@@ -1,5 +1,4 @@
 import io.restassured.response.Response;
-import model.Employee;
 
 import static io.restassured.RestAssured.given;
 
@@ -9,7 +8,7 @@ class Request {
     Response createEmployeeWithDetails(Employee employee) {
 
         return
-                given().log().all()
+                given()
                         .when()
                         .body("{\n" +
                                 "\t\"name\":\"" + employee.getName() + "\",\n" +
@@ -17,7 +16,7 @@ class Request {
                                 "\t\"age\":\"" + employee.getAge() + "\"\n" +
                                 "}")
                         .post(Constants.BASE_URL + Constants.ADD_EMPLOYEE)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
 
@@ -29,7 +28,7 @@ class Request {
                 given()
                         .when()
                         .get(Constants.BASE_URL + Constants.GET_EMPLOYEE_BY_ID, employeeId)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
     }
@@ -41,7 +40,7 @@ class Request {
                 given()
                         .when()
                         .get(Constants.BASE_URL + Constants.GET_ALL_EMPLOYEES)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
     }
@@ -53,7 +52,7 @@ class Request {
                         .when()
                         .body(payload)
                         .post(Constants.BASE_URL + Constants.ADD_EMPLOYEE)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
 
@@ -62,11 +61,11 @@ class Request {
     Response updateEmployee(String employeeId, String payload) {
 
         return
-                given().log().all()
+                given()
                         .when()
                         .body(payload)
                         .put(Constants.BASE_URL + Constants.UPDATE_EMPLOYEE_DATA, employeeId)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
     }
@@ -77,7 +76,7 @@ class Request {
                 given()
                         .when()
                         .delete(Constants.BASE_URL + Constants.DELETE_EMPLOYEE, employeeId)
-                        .then().log().all()
+                        .then()
                         .extract()
                         .response();
     }

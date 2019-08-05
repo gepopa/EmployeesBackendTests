@@ -1,5 +1,4 @@
 import io.restassured.response.Response;
-import model.Employee;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -11,31 +10,25 @@ import static org.hamcrest.Matchers.is;
 
 public class CRUD {
 
-    private Request request = new Request();
+    private final Request request = new Request();
     private Response response;
 
     private String updatedName;
     private Integer updatedAge;
-    private Double updatedSalary;
+    private Integer updatedSalary;
     private Employee newEmployee;
-    private String name;
-    private String age;
-    private String salary;
 
     @BeforeTest
     public void setup() {
-        RandomGenerator randomName = new RandomGenerator(14);
-        name = randomName.randomLetters();
 
-        RandomGenerator randomAge = new RandomGenerator(2);
-        age = randomAge.randomNumbers();
+        String name = RandomGenerator.randomLetters(14);
+        String age = Integer.valueOf(RandomGenerator.randomNumbers(2)).toString();
+        String salary = Integer.valueOf(RandomGenerator.randomNumbers(5)).toString();
 
-        RandomGenerator randomSalary = new RandomGenerator(5);
-        salary = randomSalary.randomNumbers();
 
         updatedName = "U" + name;
         updatedAge = Integer.valueOf(age) + 5;
-        updatedSalary = Double.valueOf(salary) + 9000;
+        updatedSalary = Integer.valueOf(salary) + 9000;
         newEmployee = new Employee(name, age, salary);
 
         response = request.createEmployeeWithDetails(newEmployee);
@@ -107,7 +100,7 @@ public class CRUD {
                 is(newEmployee.getId()));
 
         assertThat("Employee salary does not match!", response.getBody().jsonPath()
-                .getDouble("employee_salary"), is(updatedSalary));
+                .getInt("employee_salary"), is(updatedSalary));
 
         assertThat("Employee age does not match!", response.getBody().jsonPath()
                 .getInt("employee_age"), is(updatedAge));

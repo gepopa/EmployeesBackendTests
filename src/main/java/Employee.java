@@ -1,11 +1,8 @@
-package model;
+class Employee {
 
-
-public class Employee {
-
-    private String name;
-    private String age;
-    private String salary;
+    private final String name;
+    private final String age;
+    private final String salary;
     private String id;
 
 
@@ -14,6 +11,7 @@ public class Employee {
         this.age = age;
         this.salary = salary;
     }
+
 
 
     public String getName() {
